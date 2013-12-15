@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>WeekDate QUnit Tests</title>
+        <link rel="stylesheet" href="resources/qunit.css" />
+        
+        
+        <script src="resources/qunit.js"></script>
+        <script src="../WeekDate.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+
+
+        <script>
+            // <![CDATA[
+
+            module('WeekDate : Objeto para lidar com formato "semana"');
+
+
+
+            test('FirstWeekOfYear', function () {
+                // Inicia uma instância de teste
+                var Gabarito = {
+                    '1999': '04/01/1999', '2000': '03/01/2000', '2001': '01/01/2001', '2002': '31/12/2001',
+                    '2003': '30/12/2002', '2004': '29/12/2003', '2005': '03/01/2005', '2006': '02/01/2006',
+                    '2007': '01/01/2007', '2008': '31/12/2007', '2009': '29/12/2008', '2010': '04/01/2010',
+                    '2011': '03/01/2011', '2012': '02/01/2012', '2013': '31/12/2012', '2014': '30/12/2013',
+                    '2015': '29/12/2014', '2016': '04/01/2016', '2017': '02/01/2017', '2018': '01/01/2018',
+                    '2019': '31/12/2018', '2020': '30/12/2019', '2021': '04/01/2021', '2022': '03/01/2022'
+                }
+
+
+                for (var k in Gabarito) {
+                    var year = Gabarito[k].substring(6);
+                    var month = Gabarito[k].substring(3, 5);
+                    var day = Gabarito[k].substring(0, 2);
+
+                    var dataCerta = new Date(year, parseInt(month - 1, 10), day);
+                    var dataTeste = WeekDate.FirstWeekOfYear(parseInt(k, 10));
+                    equal(dataTeste.toDateString(), dataCerta.toDateString(), dataTeste.toDateString());
+                }
+            });
+
+            test('LastWeekOfYear', function () {
+                // Inicia uma instância de teste
+                var Gabarito = {
+                    '1999': '27/12/1999', '2000': '25/12/2000', '2001': '24/12/2001', '2002': '23/12/2002',
+                    '2003': '22/12/2003', '2004': '27/12/2004', '2005': '26/12/2005', '2006': '25/12/2006',
+                    '2007': '24/12/2007', '2008': '22/12/2008', '2009': '28/12/2009', '2010': '27/12/2010',
+                    '2011': '26/12/2011', '2012': '24/12/2012', '2013': '23/12/2013', '2014': '22/12/2014',
+                    '2015': '28/12/2015', '2016': '26/12/2016', '2017': '25/12/2017', '2018': '24/12/2018',
+                    '2019': '23/12/2019', '2020': '28/12/2020', '2021': '27/12/2021', '2022': '26/12/2022'
+                }
+
+
+                for (var k in Gabarito) {
+                    var year = Gabarito[k].substring(6);
+                    var month = Gabarito[k].substring(3, 5);
+                    var day = Gabarito[k].substring(0, 2);
+
+                    var dataCerta = new Date(year, parseInt(month - 1, 10), day);
+                    var dataTeste = WeekDate.LastWeekOfYear(parseInt(k, 10));
+                    equal(dataTeste.toDateString(), dataCerta.toDateString(), dataTeste.toDateString());
+                }
+            });
+
+            test('WeeksInYear', function () {
+                // Inicia uma instância de teste
+                var Gabarito = {
+                    '1999': '52', '2000': '52', '2001': '52', '2002': '52', '2003': '52',
+                    '2004': '53', '2005': '52', '2006': '52', '2007': '52', '2008': '52',
+                    '2009': '53', '2010': '52', '2011': '52', '2012': '52', '2013': '52',
+                    '2014': '52', '2015': '53', '2016': '52', '2017': '52', '2018': '52',
+                    '2019': '52', '2020': '53', '2021': '52', '2022': '52'
+                }
+
+
+                for (var k in Gabarito) {
+                    var semanas = parseInt(Gabarito[k], 10);
+                    var teste = WeekDate.WeeksInYear(parseInt(k, 10));
+                    equal(teste, semanas, semanas);
+                }
+            });
+
+            test('YearOfWeekDate', function () {
+                // Inicia uma instância de teste
+                var Gabarito = {
+                    '27/12/1900': '1900', '28/12/1900': '1900', '29/12/1900': '1900', '30/12/1900': '1900',
+                    '31/12/1900': '1901', '01/01/1901': '1901', '02/01/1901': '1901', '03/01/1901': '1901',
+                    '04/01/1901': '1901', '05/01/1901': '1901',
+
+                    '27/12/1999': '1999', '28/12/1999': '1999', '29/12/1999': '1999', '30/12/1999': '1999',
+                    '31/12/1999': '1999', '01/01/2000': '1999', '02/01/2000': '1999', '03/01/2000': '2000',
+                    '04/01/2000': '2000', '05/01/2000': '2000'
+                }
+
+
+                for (var k in Gabarito) {
+                    var year = k.substring(6);
+                    var month = k.substring(3, 5);
+                    var day = k.substring(0, 2);
+
+                    var dataTeste = new Date(year, parseInt(month - 1, 10), day);
+                    var anoTeste = WeekDate.YearOfWeekDate(dataTeste);
+                    equal(Gabarito[k], anoTeste, Gabarito[k]);
+                }
+            });
+
+            test('WeekNumberOfDate', function () {
+                // Inicia uma instância de teste
+                var Gabarito = {
+                    '01/01/1900': '1', '08/01/1900': '2', '15/01/1900': '3', '22/01/1900': '4',
+                    '29/01/1900': '5', '05/02/1900': '6', '12/02/1900': '7', '19/02/1900': '8',
+                    '26/02/1900': '9', '05/03/1900': '10', '10/12/1900': '50', '17/12/1900': '51',
+                    '24/12/1900': '52', '31/12/1900': '1', '07/01/1901': '2',
+
+                    // Teste com o ano 2012
+                    '02/01/2012': '1', '09/01/2012': '2', '16/01/2012': '3', '23/01/2012': '4',
+                    '30/01/2012': '5', '06/02/2012': '6', '13/02/2012': '7', '20/02/2012': '8',
+                    '27/02/2012': '9', '05/03/2012': '10',
+
+                    // Teste da data do inicio dos anos 
+                    '01/01/2000': '52', '01/01/2001': '1', '01/01/2002': '1', '01/01/2003': '1',
+                    '01/01/2004': '1', '01/01/2005': '53', '01/01/2006': '52', '01/01/2007': '1',
+                    '01/01/2008': '1', '01/01/2009': '1', '01/01/2010': '53', '01/01/2011': '52',
+                    '01/01/2012': '52', '01/01/2013': '1', '01/01/2014': '1', '01/01/2015': '1',
+                    '01/01/2016': '53', '01/01/2017': '52', '01/01/2018': '1', '01/01/2019': '1',
+                    '01/01/2020': '1', '01/01/2021': '53', '01/01/2022': '52',
+
+                    // Teste da data do final dos anos 
+                    '31/12/1999': '52', '31/12/2000': '52', '31/12/2001': '1', '31/12/2002': '1',
+                    '31/12/2003': '1', '31/12/2004': '53', '31/12/2005': ' 52', '31/12/2006': '52',
+                    '31/12/2007': '1', '31/12/2008': '1', '31/12/2009': '53', '31/12/2010': '52',
+                    '31/12/2011': '52', '31/12/2012': '1', '31/12/2013': '1', '31/12/2014': '1',
+                    '31/12/2015': '53', '31/12/2016': '52', '31/12/2017': '52', '31/12/2018': '1',
+                    '31/12/2019': '1', '31/12/2020': '53', '31/12/2021': '52', '31/12/2022': '52'
+                }
+
+
+                for (var k in Gabarito) {
+                    var year = k.substring(6);
+                    var month = k.substring(3, 5);
+                    var day = k.substring(0, 2);
+
+                    var dataTeste = new Date(year, parseInt(month - 1, 10), day);
+                    var semanaTeste = WeekDate.WeekNumberOfDate(dataTeste);
+                    equal(Gabarito[k], semanaTeste, Gabarito[k]);
+                }
+            });
+
+            test('DateOfWeek', function () {
+                for (var ano = 1900; ano <= 2101; ano++) {
+                    var dataCerta = WeekDate.FirstWeekOfYear(ano);
+                    var TotalDeSemanas = WeekDate.WeeksInYear(ano);
+
+                    // Para cada semana do ano ...
+                    for (var semana = 1; semana <= TotalDeSemanas; semana++) {
+                        // para cada dia da semana
+                        for (var dia = 1; dia <= 7; dia++) {
+                            var dataTeste = WeekDate.DateOfWeek(ano, semana, dia);
+
+                            // Devido às regras UTC de local time não existe no brasil a meia noite do dia 21 de outubro.
+                            // Isto causa um erro ao resgatar esta data. Para resolver utilize os métodos UTC abaixo.
+
+                            var certa = dataCerta.getUTCFullYear() + '-' + dataCerta.getUTCMonth() + '-' + dataCerta.getUTCDate();
+                            var teste = dataTeste.getUTCFullYear() + '-' + dataTeste.getUTCMonth() + '-' + dataTeste.getUTCDate();
+
+                            equal(teste, certa, certa);
+
+
+                            dataCerta = dataCerta.AddDays(1);
+                        }
+                    }
+                }
+
+
+                // Testes com datas em formato string
+                var sValidWeekDates = ['2012-W1', '2012-W1-1', '2012-W1-7', '2012-W45-5', '2012-W45-7'];
+                for (var it in sValidWeekDates) {
+                    notEqual(WeekDate.DateOfWeek(sValidWeekDates[it]), null, '');
+                }
+
+                var sInValidWeekDates = ['2012-54', '2012-W54', '2012-W54-1', '2012-W1-8'];
+                for (var it in sInValidWeekDates) {
+                    equal(WeekDate.DateOfWeek(sInValidWeekDates[it]), null, '');
+                }
+
+
+            });
+
+            test('IsWeek', function () {
+                ok(WeekDate.IsWeek('01-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('01-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('02-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('03-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('04-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('05-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('50-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('51-2012'), 'Semana existe');
+                ok(WeekDate.IsWeek('52-2012'), 'Semana existe');
+                ok(!WeekDate.IsWeek('53-2012'), 'Semana 53 do ano 2012 não existe');
+                ok(!WeekDate.IsWeek('1-2012'), 'Semana mal formatada');
+                ok(!WeekDate.IsWeek('54-2012'), 'Semana não existe');
+            });
+
+            test('ToWeekFormat', function () {
+                for (var ano = 1900; ano <= 2101; ano++) {
+                    var dataTeste = WeekDate.FirstWeekOfYear(ano);
+                    var TotalDeSemanas = WeekDate.WeeksInYear(ano);
+
+                    // Para cada semana do ano ...
+                    for (var semana = 1; semana <= TotalDeSemanas; semana++) {
+                        // para cada dia da semana
+                        for (var dia = 1; dia <= 7; dia++) {
+                            var WeekCerta = ano + '-W';
+                            if (semana < 10) { WeekCerta += '0' + semana; }
+                            else { WeekCerta += semana; }
+
+                            var weekTeste1 = dataTeste.ToWeekFormat(false);
+                            var weekTeste2 = dataTeste.ToWeekFormat();
+
+                            equal(weekTeste1, WeekCerta, WeekCerta);
+
+                            WeekCerta += "-" + dia;
+                            equal(weekTeste2, WeekCerta, WeekCerta);
+
+                            dataTeste = dataTeste.AddDays(1);
+
+                            // Devido às regras UTC de local time não existe no brasil a meia noite do dia 21 de outubro.
+                            // Isto faz com que datas neste periodo ganhem 1 hora... então, corrigimos aqui o horario
+                            // do dia 22 de outubro retornando-o para as 0 horas
+                            dataTeste.setHours(0);
+                        }
+                    }
+                }
+            });
+
+
+            // ]]>
+        </script>
+    </body>
+</html>
