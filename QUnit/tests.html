@@ -19,7 +19,7 @@
             // <![CDATA[
 
             module('WeekDate : Objeto para lidar com formato "semana"');
-
+            var WeekDate = CodeCraft.WeekDate;
 
 
             test('FirstWeekOfYear', function () {
@@ -229,11 +229,6 @@
                             equal(weekTeste2, WeekCerta, WeekCerta);
 
                             dataTeste = dataTeste.AddDays(1);
-
-                            // Devido às regras UTC de local time não existe no brasil a meia noite do dia 21 de outubro.
-                            // Isto faz com que datas neste periodo ganhem 1 hora... então, corrigimos aqui o horario
-                            // do dia 22 de outubro retornando-o para as 0 horas
-                            dataTeste.setHours(0);
                         }
                     }
                 }

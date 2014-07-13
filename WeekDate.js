@@ -14,24 +14,25 @@
 
 
 
+// --------------------
+// Caso não exista, inicia objeto CodeCraft
+var CodeCraft = (CodeCraft || function () { });
+if(typeof(CodeCraft) === 'function') { CodeCraft = new CodeCraft(); };
 
 
 
 
 
 
-
-
-/**
-* Classe que provê métodos de manipulação de datas em formato Week (ISO 8601).
+/*** Classe que provê métodos de manipulação de datas em formato Week (ISO 8601).
 *
 * @class WeekDate
 *
 * @static
 *
-* @global
+* @memberof CodeCraft
 */
-var WeekDate = new (function () {
+CodeCraft.WeekDate = new (function () {
     /**
     * Adiciona "d" ao dia da instância atual.
     * Pode alterar os demais atributos da instância atual.
@@ -94,8 +95,8 @@ var WeekDate = new (function () {
     Date.prototype.ToWeekFormat = function (is, f) {
         var sR = '';
 
-        var y = WeekDate.YearOfWeekDate(this);
-        var n = WeekDate.WeekNumberOfDate(this);
+        var y = CodeCraft.WeekDate.YearOfWeekDate(this);
+        var n = CodeCraft.WeekDate.WeekNumberOfDate(this);
         var d = this.getUTCDay();
 
         // Corrige semana com apenas 1 digito
@@ -133,7 +134,7 @@ var WeekDate = new (function () {
     * @return {Date}
     */
     String.prototype.DateOfWeek = function () {
-        return WeekDate.DateOfWeek(this);
+        return CodeCraft.WeekDate.DateOfWeek(this);
     };
 
 
@@ -159,7 +160,7 @@ var WeekDate = new (function () {
     *
     * @class WeekMember
     *
-    * @memberof WeekDate
+    * @memberof CodeCraft
     *
     * @private
     *
@@ -176,7 +177,7 @@ var WeekDate = new (function () {
     *
     * @constructs
     *
-    * @memberof WeekMember
+    * @memberof CodeCraft
     *
     * @param {String}                               sW                  Texto no formato week.
     */
@@ -187,7 +188,7 @@ var WeekDate = new (function () {
             day: 0
         };
 
-        if (WeekDate.IsWeek(sW)) {
+        if (CodeCraft.WeekDate.IsWeek(sW)) {
             var wF = sW.toString().toLowerCase().replace('w', '').replace(/-/g, ' ').split(' ');
 
             if (wF.length == 2 || wF.length == 3) {
@@ -213,7 +214,7 @@ var WeekDate = new (function () {
             }
         }
 
-        if(oR.year == 0 || oR.week == 0 || oR.day == 0) { oR = null; }
+        if (oR.year == 0 || oR.week == 0 || oR.day == 0) { oR = null; }
         else {
             oR.year = parseInt(oR.year, 10);
             oR.week = parseInt(oR.week, 10);
@@ -247,7 +248,7 @@ var WeekDate = new (function () {
         * 
         * @function FirstWeekOfYear
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -268,7 +269,7 @@ var WeekDate = new (function () {
         * 
         * @function LastWeekOfYear
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -286,7 +287,7 @@ var WeekDate = new (function () {
         * 
         * @function WeeksInYear
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -305,7 +306,7 @@ var WeekDate = new (function () {
         * 
         * @function YearOfWeekDate
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -344,7 +345,7 @@ var WeekDate = new (function () {
         * 
         * @function WeekNumberOfDate
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -361,7 +362,7 @@ var WeekDate = new (function () {
         *
         * @function DateOfWeek
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
@@ -420,7 +421,7 @@ var WeekDate = new (function () {
         * 
         * @function IsWeek
         *
-        * @memberof WeekDate
+        * @memberof CodeCraft.WeekDate
         *
         * @static
         *
