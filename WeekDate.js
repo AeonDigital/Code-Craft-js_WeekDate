@@ -12,8 +12,6 @@
 
 
 
-
-
 // --------------------
 // Caso não exista, inicia objeto CodeCraft
 var CodeCraft = (CodeCraft || function () { });
@@ -23,8 +21,8 @@ if(typeof(CodeCraft) === 'function') { CodeCraft = new CodeCraft(); };
 
 
 
-
-/*** Classe que provê métodos de manipulação de datas em formato Week (ISO 8601).
+/**
+* Classe que provê métodos de manipulação de datas em formato Week (ISO 8601).
 *
 * @class WeekDate
 *
