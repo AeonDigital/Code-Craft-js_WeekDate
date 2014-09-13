@@ -17,10 +17,10 @@
 
         <script>
             // <![CDATA[
-
+            
             module('WeekDate : Objeto para lidar com formato "semana"');
             var WeekDate = CodeCraft.WeekDate;
-
+            
 
             test('FirstWeekOfYear', function () {
                 // Inicia uma instância de teste
@@ -208,9 +208,10 @@
             });
 
             test('ToWeekFormat', function () {
-                for (var ano = 1900; ano <= 2101; ano++) {
+                for (var ano = 1900; ano < 2101; ano++) {
                     var dataTeste = WeekDate.FirstWeekOfYear(ano);
                     var TotalDeSemanas = WeekDate.WeeksInYear(ano);
+                    dataTeste.setHours(1);
 
                     // Para cada semana do ano ...
                     for (var semana = 1; semana <= TotalDeSemanas; semana++) {

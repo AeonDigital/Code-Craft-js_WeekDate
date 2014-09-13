@@ -323,6 +323,7 @@ CodeCraft.WeekDate = new (function () {
 
                 // Se a data atual é maior que o ultimo dia do ano corrente, a data
                 // pertence ao próximo ano
+                d = new Date(d.getFullYear(), d.getMonth(), d.getDate());
                 if (d > lD) { iR++; }
                 // Senão, deve testar se a data pertence ao ano anterior.
                 else {
