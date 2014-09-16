@@ -7,7 +7,7 @@
 *
 * @author Rianna Cantarelli <rianna.aeon@gmail.com>
 */
-
+'use strict';
 
 
 
@@ -240,7 +240,7 @@ CodeCraft.WeekDate = new (function () {
 
 
 
-    var static = {
+    var _static = {
         /**
         * Retorna um Date setado para a segunda feira da primeira semana do ano indicado.
         * 
@@ -477,5 +477,5 @@ CodeCraft.WeekDate = new (function () {
     };
 
 
-    return static;
+    return _static;
 });
